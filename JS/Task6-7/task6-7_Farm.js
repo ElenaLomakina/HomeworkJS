@@ -39,10 +39,12 @@ function LandResource (type, product, productivity, durability, seed) {
 
 
 LandResource.prototype.clone = function () {
-    return new LandResource(this.type, this.product, this.productivity, this.durability, this.seed)
+    return new LandResource(this.type, this.product, this.productivity, this.durability, this.seed)             //  ???
 };
 
-
+LandResource.prototype.isReadyForPlanting = function(){
+    return !this.seed;
+};
 
 function Farm(){
     this.resources = [];
@@ -50,24 +52,32 @@ function Farm(){
 }
 
 
-Farm.prototype.getResource = function (curResource) {
-    this.resources = this.resources.push(curResource);
-};
+// Farm.prototype.getResource = function (curResource) {
+//     this.resources = this.resources.push(curResource)                                                          //  ???
+// };
 
 
 var apple = new Product("apple", 20);
+var plum = new Product("plum", 40);
 var appleResource = new LandResource("apple", apple, 200, 5, false);
+var plumResource = new LandResource("plum", plum, 150, 4, false);
 var myFarm = new Farm();
 
 var appleResource1 = appleResource.clone;
 
 
-
-myFarm.getResource(appleResource);
+//
+// myFarm.getResource(appleResource());
+// myFarm.getResource(appleResource1);
+// myFarm.getResource(plumResource);
 
 console.log(appleResource);
 console.log(appleResource1);
+console.log(plumResource);
 
 console.log(myFarm);
 
 console.log(apple);
+console.log(plum);
+
+console.log(appleResource.isReadyForPlanting);
