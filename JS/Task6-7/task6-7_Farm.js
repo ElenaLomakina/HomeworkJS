@@ -22,6 +22,13 @@
 //     Заменить ошибку посева на выбрасывание исключения.
 //
 
+
+function Product(type, cost) {
+    this.type = type;
+    this.cost = cost;
+}
+
+
 function LandResource (type, product, productivity, durability, seed) {
     this.type = type;
     this.product = product;
@@ -36,35 +43,30 @@ LandResource.prototype.clone = function () {
 };
 
 
-function Product(type) {
-    this.type = type;
-}
-
-Product.prototype.cost = function (val) {
-    this.cost = val;
-};
 
 function Farm(){
     this.resources = [];
+    this.income = 0;
 }
 
 
-// Farm.prototype.getResource = function (resource) {
-//     this.resources = this.resources.push(resource);
-// };
+Farm.prototype.getResource = function (curResource) {
+    this.resources = this.resources.push(curResource);
+};
 
-var pane1 = new LandResource("pane", "apple", 200, 5, false);
-var apple = new Product("apple");
+
+var apple = new Product("apple", 20);
+var appleResource = new LandResource("apple", apple, 200, 5, false);
 var myFarm = new Farm();
 
-var pane2 = pane1.clone;
+var appleResource1 = appleResource.clone;
 
-apple.cost = 20;
 
-// myFarm.getResource = pane;
 
-console.log(pane1);
-console.log(pane2);
+myFarm.getResource(appleResource);
+
+console.log(appleResource);
+console.log(appleResource1);
 
 console.log(myFarm);
 
