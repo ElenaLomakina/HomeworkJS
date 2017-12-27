@@ -2,14 +2,14 @@
 //    Написть 3 конструктора, которые будут реализовывать интерфейс:
 //    function Farm();                                                                                                  +
 //      Farm.prototype.harvest();
-//      Farm.prototype.getResource(index);
+//      Farm.prototype.getResource(index);                                                                              +
 //
 //    function Resource(type, product, income, durability);                                                             +
 //      Resource.prototype.harvest();
 //      Resource.prototype.restore();
-//      Resource.prototype.isReadyForPlanting();
-//      Resource.prototype.plant();
-//      Resource.prototype.clone();
+//      Resource.prototype.isReadyForPlanting();                                                                        +
+//      Resource.prototype.plant();                                                                                     +
+//      Resource.prototype.clone();                                                                                     +
 //
 //    function Product(type);                                                                                           +
 //
@@ -23,9 +23,10 @@
 //
 
 
-function Product(type, cost) {
+function Product(type, price) {
     this.type = type;
-    this.cost = cost;
+    this.price = price;
+    this.quantity = 0;
 }
 
 
@@ -39,45 +40,70 @@ function LandResource (type, product, productivity, durability, seed) {
 
 
 LandResource.prototype.clone = function () {
-    return new LandResource(this.type, this.product, this.productivity, this.durability, this.seed)             //  ???
+    return new LandResource(this.type, this.product, this.productivity, this.durability, this.seed)
 };
 
 LandResource.prototype.isReadyForPlanting = function(){
     return !this.seed;
 };
 
+LandResource.prototype.plant = function() {
+    if (this.seed){
+        return console.log("The ground was already planted");
+    }
+    else {
+        this.seed = true;
+        this.durability --;
+    }
+};
+
+
+
+
+
+
 function Farm(){
     this.resources = [];
+    this.storage = [];
     this.income = 0;
 }
 
+Farm.prototype.addResource = function (curResource) {
+    this.resources.push(curResource)
+};
 
-// Farm.prototype.getResource = function (curResource) {
-//     this.resources = this.resources.push(curResource)                                                          //  ???
-// };
+Farm.prototype.addProduct = function (product) {
+    this.storage.push(product)
+};
 
 
 var apple = new Product("apple", 20);
 var plum = new Product("plum", 40);
-var appleResource = new LandResource("apple", apple, 200, 5, false);
-var plumResource = new LandResource("plum", plum, 150, 4, false);
+
+var appleGround = new LandResource("apple", apple, 200, 5, false);
+var plumGround = new LandResource("plum", plum, 150, 4, false);
+
 var myFarm = new Farm();
 
-var appleResource1 = appleResource.clone;
+var appleGround1 = appleGround.clone();
 
 
-//
-// myFarm.getResource(appleResource());
-// myFarm.getResource(appleResource1);
-// myFarm.getResource(plumResource);
 
-console.log(appleResource);
-console.log(appleResource1);
-console.log(plumResource);
+myFarm.addResource(appleGround);
+myFarm.addResource(appleGround1);
+myFarm.addResource(plumGround);
+
+
+console.log(appleGround);
+console.log(appleGround);
+console.log(plumGround);
 
 console.log(myFarm);
 
 console.log(apple);
 console.log(plum);
 
-console.log(appleResource.isReadyForPlanting);
+console.log(appleGround.isReadyForPlanting());
+appleGround.plant();
+plumGround.plant();
+

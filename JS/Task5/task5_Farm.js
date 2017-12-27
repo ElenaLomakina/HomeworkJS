@@ -87,7 +87,7 @@ function getHarvest(index) {
 //  f. Написать функцию, которая “сеет семена” на ЗР. (не забываем обновлять изношенность)
 //      function sows seeds in index-th resource and reduce durability -------------------------------------
 
-function sowSeeds(index) {
+function plant(index) {
     var obj = farm[index];
     if (obj.seed){
         return console.log("The pane was already seeded");
@@ -113,17 +113,17 @@ console.log(messageIsReadyForPlanting(1));
 console.log(messageIsReadyForPlanting());
 
 getHarvest(1);
-sowSeeds(2);
+plant(2);
 getHarvest(2);
 console.log(harvest);
-sowSeeds(0);
-sowSeeds(1);
+plant(0);
+plant(1);
 
 getHarvest(0);
 getHarvest(1);
-sowSeeds(2);
+plant(2);
 getHarvest(2);
-sowSeeds(0);
+plant(0);
 getHarvest(0);
 getHarvest(2);
 
