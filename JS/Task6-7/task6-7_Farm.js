@@ -25,7 +25,7 @@ Farm.prototype.addResource = function (curResource) {
 
 Farm.prototype.addToStorage = function (position) {
     this.storage.push(position);
-    var div = document.createElement("div"); // From now you can work with div's properties
+    var div = document.createElement("div");
     div.className = position.product.type;
     var elem = document.getElementById("storage");
     elem.appendChild(div);
