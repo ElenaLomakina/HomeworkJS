@@ -10,5 +10,6 @@ function Product(type, price) {
 function StoragePosition(product, quantity) {
     this.product = product;
     this.quantity = quantity;
+
 }
 

@@ -58,6 +58,7 @@ GardenResource.prototype.getHarvestTo = function(farm) {
             var exist = false;
             if (obj.product.type === this.product.type){
                 obj.quantity += this.productivity;
+                obj.innerHTML = this.product.type + obj.quantity;
                 this.seed = false;
                 exist = true;
                 break;
