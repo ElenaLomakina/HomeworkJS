@@ -11,20 +11,37 @@ body{
   flex-direction: row;
   justify-content: space-between;
   div{
-    border: darkslategrey solid 3px;
-    padding: 10px;
+    border: grey solid 2px;
+    padding: 5px;
+    margin: 5px;
   }
 }
 #field{
   width: 78%;
-  background-color: lightgreen;
+  background-color: rosybrown;
+  display: flex;
+  flex-flow: row wrap;
 }
-#storage{
+.right{
   width: 18%;
+}
+#storage, #market{
   background-color: azure;
 }
+#market{
+  background-color: lavenderblush;
+}
+
 h2, h3{
   text-align: center;
+  width: 100%;
+}
+
+.resource{
+  width: 24%;
+  //height: revert;
+
+  border: 2px solid;
 
 }
 

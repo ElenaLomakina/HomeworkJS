@@ -27,8 +27,8 @@ Farm.prototype.addToStorage = function (position) {
     this.storage.push(position);
     var div = document.createElement("div");
     div.className = position.product.type;
-    var elem = document.getElementById("storage");
-    elem.appendChild(div);
+    // var elem = document.getElementById("storage");
+    storage.appendChild(div);
     switch (div.className){
         case ("apple"):
             div.setAttribute("style", "background-color:#6eff5d");
@@ -41,7 +41,11 @@ Farm.prototype.addToStorage = function (position) {
 };
 
 Farm.prototype.getHarvest = function(){
-  this.resources.forEach(function (value) { value.getHarvestTo(myFarm) })          // почему this вместо myFarm не работает?
+    var self = this;
+    this.resources.forEach(function (value) {
+      console.log("window", self);
+      value.getHarvestTo(self)
+  })          // почему this вместо myFarm не работает?
 };
 
 
