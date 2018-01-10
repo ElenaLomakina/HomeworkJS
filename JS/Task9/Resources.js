@@ -40,15 +40,18 @@ GardenResource.prototype.plant = function() {
 GardenResource.prototype.getHarvestTo = function(farm){
     var self = this;
     var existPosition = farm.storage.find(function (element){
-        console.log(element.product.type);
+
         return element.product.type === self.product.type;
     });
-    console.log(this.product.type);
+
     if (!this.seed){
         return console.log("The pane was not seeded");
     }
     else if (existPosition){
         existPosition.quantity += this.productivity;
+        var positionBlock = storage.querySelector("." + existPosition.product.type);
+        var positionQuantity = positionBlock.querySelector(".position-quantity");
+        positionQuantity.innerHTML = "Quantity: " + existPosition.quantity;
         this.seed = false;
     }
     else {

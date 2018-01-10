@@ -1,54 +1,64 @@
 body{
   padding: 1%;
+  background-color: lemonchiffon;
 }
 
 .wrapper{
-  padding: 10px;
+  //padding: 10px;
   width: 100%;
   margin: 0 auto;
-  background-color: lemonchiffon;
+
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  div{
-    border: grey solid 2px;
-    padding: 5px;
-    margin: 5px;
-  }
+  align-items: flex-start;
+
 }
 #field{
   width: 78%;
-  background-color: rosybrown;
+  min-height: 500px;
+  background-color: #ffe2cf;
   display: flex;
   flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 .right{
   width: 18%;
 }
-#storage, #market{
+#storage{
   background-color: azure;
+  min-height: 200px;
 }
 #market{
   background-color: lavenderblush;
+  min-height: 200px;
+}
+
+#field, #storage, #market{
+  border: black solid 1px;
+  padding: 10px;
+  margin-bottom: 10px;
 }
 
 h2, h3{
   text-align: center;
   width: 100%;
+  margin: 10px 0;
+}
+h4{
+  margin: 0 0 5px 0;
+}
+
+.storagePosition, .resource{
+  padding: 5px;
+  margin: 5px;
+  border: black solid 1px;
 }
 
 .resource{
-  width: 24%;
-  //height: revert;
+  width: 150px;
+  height: 150px;
 
-  border: 2px solid;
 
-}
-
-.apple{
-  background-color: #6eff5d;
-}
-
-.plum{
-  background-color: plum;
 }

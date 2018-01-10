@@ -15,7 +15,6 @@ Farm.prototype.addResource = function (curResource) {
     // });
 
     resourceBlock.style.backgroundColor = curResource.product.color;
-    resourceBlock.style.height = resourceBlock.style.width;
     resourceBlock.classList.add("resource");
     resourceTitle.classList.add("resource-title");
     resourceTitle.innerHTML = curResource.type;
@@ -31,19 +30,21 @@ Farm.prototype.addResource = function (curResource) {
 
 Farm.prototype.addToStorage = function (position) {
     this.storage.push(position);
-    var div = document.createElement("div");
-    div.className = position.product.type;
-    // var elem = document.getElementById("storage");
-    storage.appendChild(div);
-    switch (div.className){
-        case ("apple"):
-            div.setAttribute("style", "background-color:#6eff5d");
-            break;
-        case ("plum"):
-            div.setAttribute("style", "background-color:plum");
-            break;
-    }
-    div.innerHTML = div.className + " " + position.quantity;
+    var positionBlock = document.createElement("div");
+    var positionTitle = document.createElement("h4");
+    var positionQuantity = document.createElement("div");
+
+    positionBlock.style.backgroundColor = position.product.color;
+    positionBlock.classList.add("storagePosition", position.product.type);
+    positionTitle.classList.add("position-title");
+    positionTitle.innerHTML = "Storage position: " + position.product.type;
+    positionQuantity.classList.add("position-quantity");
+    positionQuantity.innerHTML = "Quantity: " + position.quantity;
+
+    positionBlock.appendChild(positionTitle);
+    positionBlock.appendChild(positionQuantity);
+    storage.appendChild(positionBlock);
+
 };
 
 Farm.prototype.getHarvest = function(){
