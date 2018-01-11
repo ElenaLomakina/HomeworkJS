@@ -15,7 +15,7 @@ Farm.prototype.addResource = function (curResource) {
     // });
 
     resourceBlock.style.backgroundColor = curResource.product.color;
-    resourceBlock.classList.add("resource");
+    resourceBlock.classList.add("resource", curResource.product.name);
     resourceTitle.classList.add("resource-title");
     resourceTitle.innerHTML = curResource.type;
     resourceList.classList.add("resources-list");
@@ -49,8 +49,22 @@ Farm.prototype.addToStorage = function (position) {
 
 Farm.prototype.getHarvest = function(){
     var self = this;
-    this.resources.forEach(function (value) {
-        value.getHarvestTo(self)
+    this.resources.forEach(function (resource) {
+        var resourceHarvest = resource.getHarvest();
+        var existPosition = self.storage.find(function (element){
+            return element.product.name === resource.product.name;
+        });
+        if(resourceHarvest){
+            if (existPosition){
+                existPosition.quantity += resourceHarvest;
+                var positionBlock = storage.querySelector("." + existPosition.product.name);
+                var positionQuantity = positionBlock.querySelector(".position-quantity");
+                positionQuantity.innerHTML = "<span>Quantity: </span>" + existPosition.quantity;
+            }
+            else {
+                self.addToStorage(new StoragePosition(resource.product, resourceHarvest));
+            }
+        }
     })
 };
 

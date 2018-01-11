@@ -9,13 +9,3 @@ function StoragePosition(product, quantity) {
     this.quantity = quantity;
 
 }
-
-// StoragePosition.prototype.sell = function (amount, farm) {
-//     if (amount){
-//
-//
-//     }
-//     else if (amount <== this.quantity){
-//         Farm.income = this.product.price * amount;
-//     }
-// };

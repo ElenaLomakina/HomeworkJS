@@ -33,18 +33,21 @@ console.log(myFarm);
 
 plumGarden.plant();
 appleGarden.plant();
+appleGarden1.plant();
 
-setTimeout(function(){plumGarden.getHarvestTo(myFarm)}, 9000);
 setTimeout(function(){console.log("plumGarden.ripe: ", plumGarden.ripe)}, 10000);
-
-setTimeout(function(){appleGarden.getHarvestTo(myFarm)}, 9000);
 setTimeout(function(){console.log("appleGarden.ripe: ", appleGarden.ripe)}, 10000);
+setTimeout(function(){console.log("appleGarden1.ripe: ", appleGarden1.ripe)}, 10000);
 
-setTimeout(function(){appleGarden.plant()}, 11000);
-setTimeout(function(){appleGarden.getHarvestTo(myFarm)}, 20000);
+setTimeout(function(){myFarm.getHarvest()}, 11000);
 
-setTimeout(function(){appleGarden.plant()}, 21000);
-setTimeout(function(){appleGarden.getHarvestTo(myFarm)}, 30000);
 
-setTimeout(function(){myFarm.sellProducts(apple, 200)}, 50000);
-setTimeout(function(){myFarm.sellProducts()}, 55000);
+
+setTimeout(function(){appleGarden.plant()}, 15000);
+setTimeout(function(){appleGarden1.plant()}, 15000);
+setTimeout(function(){plumGarden.plant()}, 15000);
+
+setTimeout(function(){myFarm.getHarvest()}, 25000);
+
+setTimeout(function(){myFarm.sellProducts(apple, 200)}, 30000);
+setTimeout(function(){myFarm.sellProducts()}, 35000);

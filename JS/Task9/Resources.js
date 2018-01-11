@@ -31,6 +31,11 @@ GardenResource.prototype.maturation = function () {
         if (ready === self.productivity){
             clearInterval(intervalId);
             self.ripe = true;
+            var resourceBlock = field.querySelector("." + self.product.name);
+            var resourceInfo = document.createElement("div");
+            resourceInfo.classList.add("info");
+            resourceInfo.innerHTML = "<b>" + self.product.name + "s are already ripe</b>";
+            resourceBlock.appendChild(resourceInfo);
         }
     }, 1000);
 };
@@ -54,27 +59,12 @@ GardenResource.prototype.plant = function() {
     }
 };
 
-
-GardenResource.prototype.getHarvestTo = function(farm){
-    var self = this;
-    var existPosition = farm.storage.find(function (element){
-
-        return element.product.name === self.product.name;
-    });
-
-
+GardenResource.prototype.getHarvest = function () {
     if (!this.isReadyForHarvesting()){
-        return console.log("The pane was not seeded");
-    }
-    else if (existPosition){
-        existPosition.quantity += this.productivity;
-        var positionBlock = storage.querySelector("." + existPosition.product.name);
-        var positionQuantity = positionBlock.querySelector(".position-quantity");
-        positionQuantity.innerHTML = "<span>Quantity: </span>" + existPosition.quantity;
-        this.seed = false;
+        console.log("The garden was not seeded or products haven't ripe yet");
     }
     else {
-        farm.addToStorage(new StoragePosition(this.product, this.productivity));
         this.seed = false;
+        return this.productivity;
     }
 };
