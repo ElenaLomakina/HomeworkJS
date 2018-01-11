@@ -1,5 +1,5 @@
-function Product(type, color, price) {
-    this.type = type;
+function Product(name, color, price) {
+    this.name = name;
     this.color = color;
     this.price = price;
 }
@@ -9,3 +9,13 @@ function StoragePosition(product, quantity) {
     this.quantity = quantity;
 
 }
+
+// StoragePosition.prototype.sell = function (amount, farm) {
+//     if (amount){
+//
+//
+//     }
+//     else if (amount <== this.quantity){
+//         Farm.income = this.product.price * amount;
+//     }
+// };

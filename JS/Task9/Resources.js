@@ -3,6 +3,7 @@ function GardenResource (type, product, productivity, maturationPerTick, durabil
     this.type = type;
     this.product = product;
     this.seed = false;
+    this.ripe = false;
     this.productivity = productivity;
     this.maturationPerTick = maturationPerTick;
     this.durability = durability;
@@ -22,6 +23,22 @@ GardenResource.prototype.isReadyForPlanting = function(){
     return !this.seed && this.depletion < this.durability;
 };
 
+GardenResource.prototype.maturation = function () {
+    var ready = 0;
+    var self = this;
+    var intervalId = setInterval(function () {
+        ready += self.maturationPerTick;
+        if (ready === self.productivity){
+            clearInterval(intervalId);
+            self.ripe = true;
+        }
+    }, 1000);
+};
+
+GardenResource.prototype.isReadyForHarvesting = function(){
+    return this.seed && this.ripe;
+};
+
 GardenResource.prototype.restore = function(){
     return this.depletion = this.durability;
 };
@@ -30,6 +47,7 @@ GardenResource.prototype.plant = function() {
     if (this.isReadyForPlanting()){
         this.seed = true;
         this.depletion ++;
+        this.maturation();
     }
     else {
         return console.log("You can't plant there now. The ground either was already planted or needs to be restored");
@@ -41,17 +59,18 @@ GardenResource.prototype.getHarvestTo = function(farm){
     var self = this;
     var existPosition = farm.storage.find(function (element){
 
-        return element.product.type === self.product.type;
+        return element.product.name === self.product.name;
     });
 
-    if (!this.seed){
+
+    if (!this.isReadyForHarvesting()){
         return console.log("The pane was not seeded");
     }
     else if (existPosition){
         existPosition.quantity += this.productivity;
-        var positionBlock = storage.querySelector("." + existPosition.product.type);
+        var positionBlock = storage.querySelector("." + existPosition.product.name);
         var positionQuantity = positionBlock.querySelector(".position-quantity");
-        positionQuantity.innerHTML = "Quantity: " + existPosition.quantity;
+        positionQuantity.innerHTML = "<span>Quantity: </span>" + existPosition.quantity;
         this.seed = false;
     }
     else {
