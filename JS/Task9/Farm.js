@@ -10,7 +10,7 @@ Farm.prototype.addResource = function (curResource) {
     var resourceTitle = document.createElement("h4");
     var resourceList = document.createElement("div");
 
-    // resourceBlock.addEventListener("mousedown", function () {
+    // resourceBlock.addEventListener("click", function () {
     //     this.classList.add("active");
     // });
 
@@ -24,7 +24,6 @@ Farm.prototype.addResource = function (curResource) {
     resourceBlock.appendChild(resourceTitle);
     resourceBlock.appendChild(resourceList);
     field.appendChild(resourceBlock);
-
 
 };
 
@@ -68,50 +67,30 @@ Farm.prototype.getHarvest = function(){
     })
 };
 
-Farm.prototype.sellProducts = function (product, quantity) {
+Farm.prototype.sellProducts = function (product, quantity){
     var self = this;
-    if (product){
-        var existPosition = this.storage.find(function (element){
-            return element.product.name === product.name;
-        });
-    }
-    if(existPosition){
-        var positionBlock = storage.querySelector("." + existPosition.product.name);
-        var positionQuantity = positionBlock.querySelector(".position-quantity");
-    }
-
-    if (quantity && existPosition){
-        if(quantity <= existPosition.quantity) {
-            this.income +=  product.price * quantity;
-            existPosition.quantity -= quantity;
-            positionQuantity.innerHTML = "<span>Quantity: </span>" + existPosition.quantity;
-        }
-        else {throw new Error("The quantity of this product is not enough");}
-    }
-    else if (existPosition && !quantity){
-        this.income +=  product.price * existPosition.quantity;
-        existPosition.quantity = 0;
-        positionQuantity.innerHTML = "<span>Quantity: </span>" + existPosition.quantity;
-    }
-    else if (product && !existPosition)
-    {throw new Error("This product don't exist in storage");}
-    else {
+    var incomeBlock = market.querySelector(".income");
+    if (!product){
         this.storage.forEach(function(position) {
-            self.income += position.product.price * position.quantity;
-            position.quantity = 0;
+            self.income += position.sellProducts(quantity);
             var positionBlock = storage.querySelector("." + position.product.name);
             var positionQuantity = positionBlock.querySelector(".position-quantity");
             positionQuantity.innerHTML = "<span>Quantity: </span>" + position.quantity;
-        })
+        });
     }
+    else {
+        var existPosition = this.storage.find(function (element){
+            return element.product.name === product.name;
+        });
+        if(existPosition){
+            this.income += existPosition.sellProducts(quantity);
+            var positionBlock = storage.querySelector("." + existPosition.product.name);
+            var positionQuantity = positionBlock.querySelector(".position-quantity");
+            positionQuantity.innerHTML = "<span>Quantity: </span>" + existPosition.quantity;
+        }
+        else {
+            throw new Error("This product don't exist in storage");
+        }
+    }
+    incomeBlock.innerHTML = "<span>Income: </span>" + this.income;
 };
-
-// StoragePosition.prototype.sell = function (amount, farm) {
-//     if (amount){
-//
-//
-//     }
-//     else if (amount <== this.quantity){
-//         Farm.income = this.product.price * amount;
-//     }
-// };

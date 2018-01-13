@@ -8,6 +8,7 @@ function GardenResource (type, product, productivity, maturationPerTick, durabil
     this.maturationPerTick = maturationPerTick;
     this.durability = durability;
     this.depletion = 0;
+    // this.resourceBlock =
 }
 
 GardenResource.prototype.checkProduct = function () {
@@ -26,6 +27,7 @@ GardenResource.prototype.isReadyForPlanting = function(){
 GardenResource.prototype.maturation = function () {
     var ready = 0;
     var self = this;
+    // var resourceBlock = field.querySelector("maturation");
     var intervalId = setInterval(function () {
         ready += self.maturationPerTick;
         if (ready === self.productivity){
@@ -52,6 +54,7 @@ GardenResource.prototype.plant = function() {
     if (this.isReadyForPlanting()){
         this.seed = true;
         this.depletion ++;
+        // resourceInfo.classList.add("maturation");
         this.maturation();
     }
     else {

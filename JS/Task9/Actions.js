@@ -50,4 +50,5 @@ setTimeout(function(){plumGarden.plant()}, 15000);
 setTimeout(function(){myFarm.getHarvest()}, 25000);
 
 setTimeout(function(){myFarm.sellProducts(apple, 200)}, 30000);
+setTimeout(function(){myFarm.sellProducts(plum)}, 33000);
 setTimeout(function(){myFarm.sellProducts()}, 35000);
