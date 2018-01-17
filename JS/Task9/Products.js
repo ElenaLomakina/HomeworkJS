@@ -2,13 +2,25 @@ function Product(name, color, price) {
     this.name = name;
     this.color = color;
     this.price = price;
+    if (price < 0) {
+        throw RangeError("One can't create  a product" +
+            this.name + " with a negative price");
+    }
 }
 
 function StoragePosition(product, quantity) {
     this.product = product;
     this.quantity = quantity;
-
 }
+
+StoragePosition.prototype.createBlock = function () {
+    var block = create(storage, "div", "storagePosition", this.product.name);
+    blockContent(block, "", this.product.color);
+    var name = create(block, "h4", "position-name");
+    blockContent(name, this.product.name);
+    var quantity = create(block, "h4", "position-quantity");
+    blockContent(quantity, "<span>Quantity: </span>" + this.quantity);
+};
 
 StoragePosition.prototype.sellProducts = function(quantity){
     var income;

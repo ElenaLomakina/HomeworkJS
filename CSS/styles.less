@@ -22,6 +22,7 @@ body{
   flex-flow: row wrap;
   justify-content: flex-start;
   align-items: flex-start;
+  align-content: flex-start;
 }
 .right{
   width: 18%;
@@ -33,6 +34,13 @@ body{
   span{
     font-size: 14px;
     font-weight: normal;
+  }
+  .storagePosition{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-content: flex-start;
+    align-items: flex-start;
   }
 }
 #market{
@@ -69,18 +77,29 @@ h4{
 }
 
 .resource{
-  width: 150px;
-  height: 150px;
-  position: relative;
-  .info{
+  width: 200px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  .resource-title{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-content: flex-start;
+    align-items: flex-start;
+    .resource-name{
+      color: darkgreen;
+      font-weight: bold;
+      font-size: 20px;
+      text-shadow: black 0 0 1px;
+    }
+  }
+  .resource-info{
     text-transform: uppercase;
     text-align: center;
-    color: darkred;
+    color: red;
+    text-shadow: black 0 0 2px;
     margin: 5px;
-    position: absolute;
-    bottom: 5px;
-
   }
-
-
 }

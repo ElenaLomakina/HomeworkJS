@@ -6,59 +6,30 @@ function Farm(){
 
 Farm.prototype.addResource = function (curResource) {
     this.resources.push(curResource);
-    var resourceBlock = document.createElement("div");
-    var resourceTitle = document.createElement("h4");
-    var resourceList = document.createElement("div");
-
-    // resourceBlock.addEventListener("click", function () {
-    //     this.classList.add("active");
-    // });
-
-    resourceBlock.style.backgroundColor = curResource.product.color;
-    resourceBlock.classList.add("resource", curResource.product.name);
-    resourceTitle.classList.add("resource-title");
-    resourceTitle.innerHTML = curResource.type;
-    resourceList.classList.add("resources-list");
-    resourceList.innerHTML = curResource.product.name;
-
-    resourceBlock.appendChild(resourceTitle);
-    resourceBlock.appendChild(resourceList);
-    field.appendChild(resourceBlock);
-
+    curResource.createBlock();
+    var resourceBlocks = field.querySelectorAll(".resource");
+    curResource.block = resourceBlocks[resourceBlocks.length - 1];
 };
 
 Farm.prototype.addToStorage = function (position) {
     this.storage.push(position);
-    var positionBlock = document.createElement("div");
-    var positionTitle = document.createElement("h4");
-    var positionQuantity = document.createElement("div");
-
-    positionBlock.style.backgroundColor = position.product.color;
-    positionBlock.classList.add("storagePosition", position.product.name);
-    positionTitle.classList.add("position-title");
-    positionTitle.innerHTML = "<span>Storage position: </span>" + position.product.name;
-    positionQuantity.classList.add("position-quantity");
-    positionQuantity.innerHTML = "<span>Quantity: </span>" + position.quantity;
-
-    positionBlock.appendChild(positionTitle);
-    positionBlock.appendChild(positionQuantity);
-    storage.appendChild(positionBlock);
-
+    position.createBlock();
+    var positionBlocks = storage.querySelectorAll(".storagePosition");
+    position.block = positionBlocks[positionBlocks.length - 1];
 };
 
 Farm.prototype.getHarvest = function(){
     var self = this;
     this.resources.forEach(function (resource) {
-        var resourceHarvest = resource.getHarvest();
+        var resourceHarvest = resource.isReadyForHarvesting()? resource.getHarvest(): 0;
         var existPosition = self.storage.find(function (element){
             return element.product.name === resource.product.name;
         });
         if(resourceHarvest){
             if (existPosition){
                 existPosition.quantity += resourceHarvest;
-                var positionBlock = storage.querySelector("." + existPosition.product.name);
-                var positionQuantity = positionBlock.querySelector(".position-quantity");
-                positionQuantity.innerHTML = "<span>Quantity: </span>" + existPosition.quantity;
+                var positionQuantity = existPosition.block.querySelector(".position-quantity");
+                blockContent(positionQuantity, "<span>Quantity: </span>" + existPosition.quantity);
             }
             else {
                 self.addToStorage(new StoragePosition(resource.product, resourceHarvest));
