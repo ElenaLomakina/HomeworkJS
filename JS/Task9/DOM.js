@@ -1,11 +1,11 @@
-function create(parent, tag, className, className1) {
-    if (!className) className = "";
+function create(parent, tag, classNames) {
     if (!parent) parent = document;
     var block = document.createElement(tag);
-
-    block.classList.add(className);
-    if (className1) block.classList.add(className1);
-
+    if (classNames) {
+        classNames.forEach(function (className) {
+            block.classList.add(className);
+        });
+    }
     parent.appendChild(block);
     return block;
 }

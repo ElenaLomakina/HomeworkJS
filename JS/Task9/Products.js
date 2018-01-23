@@ -14,11 +14,11 @@ function StoragePosition(product, quantity) {
 }
 
 StoragePosition.prototype.createBlock = function () {
-    var block = create(storage, "div", "storagePosition", this.product.name);
+    var block = create(storage, "div", ["storagePosition", this.product.name]);
     blockContent(block, "", this.product.color);
-    var name = create(block, "h4", "position-name");
+    var name = create(block, "h4", ["position-name"]);
     blockContent(name, this.product.name);
-    var quantity = create(block, "h4", "position-quantity");
+    var quantity = create(block, "h4", ["position-quantity"]);
     blockContent(quantity, "<span>Quantity: </span>" + this.quantity);
 };
 
