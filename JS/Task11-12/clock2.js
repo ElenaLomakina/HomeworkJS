@@ -1,13 +1,17 @@
 var clockContent = function (h, m, s) {
-    var hZero = h < 10? "0": "";
-    var mZero = m < 10? "0": "";
-    var sZero = s < 10? "0": "";
+    var hZero = addZeroBefore(h);
+    var mZero = addZeroBefore(m);
+    var sZero = addZeroBefore(s);
     return  hZero + h + ":" + mZero + m + ":" + sZero + s;
 };
 
+function addZeroBefore(time) {
+    return time < 10? "0": ""
+}
+
 clock2.style.height = window.innerHeight + "px";
 
-var currentTime1 = setInterval(function () {
+setInterval(function () {
     var now = new Date();
 
     var hours = now.getUTCHours();

@@ -89,3 +89,10 @@ form{
     border-bottom: darkslateblue dotted 1px;
     padding: 15px 0;
 }
+
+#current-task{
+    padding: 10px;
+    height: 30px;
+    margin-bottom: 10px;
+    font-size: 25px;
+}
